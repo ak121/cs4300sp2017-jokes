@@ -1,0 +1,67 @@
+<html>
+<head>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="{{ url_for( 'static', filename='dynamicspecgram.js' )}}"></script>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles.css')}}" />
+  <title>Your Song's Spectrogram</title>
+</head>
+<body>
+  <h1 id="title" align="center">See Your Sound</h1>
+  <p>
+    Select Your Sound File
+  </p>
+  <input type="text" id="selectedsong" list="soundfiles" onchange="createViz()"/>
+  <datalist id="soundfiles">
+    {% for title in titles %}
+    <option value="{{title}}">
+    {% endfor %}
+  </datalist>
+  <br />
+  <br />
+  <!-- Audio controls to hear the song -->
+  Play audio while you see it.
+  <br />
+  Selected Audio: <span id="filename"></span>
+  <div>
+    <button id="play">Play/Resume</button>
+    <button id="pause">Pause</button>
+  </div>
+  <div id="audio">
+    <audio id="audioplayer" controls>
+      <source type="audio/wav" />
+      Your Browser does not support the audio element
+    </audio>
+  </div>
+
+  <!-- control the dynamic spectrogram -->
+  <br />
+  Move the slider to see the frequency breakdown at any time.
+  <br />
+  <input id="timeslider" type="range" min="0" value="0" oninput="recalculateSpectrum()"/>
+  <div id="control">
+
+    <span id="timevalue">
+
+    </span> seconds of <span id="totalsecs"></span>
+    total seconds
+  </div>
+
+  <div id="specgram"></div>
+
+  Each spike on the spectrogram represents a single tone or note. A human voice, a rock band, or a symphony orchestra sound much more rich and unique than a simple sine wave because they are composed of several additional tones, which can be seen as smaller spikes on a spectrogram.
+  <br />
+  <br />
+  <!-- from https://musescore.org/node/4581 -->
+  Some Voice Ranges in Hertz:
+  <br />
+  Soprano: 250 - 1050 Hz (C4 - C6)
+  <br />
+  Alto: 170 - 700 Hz (F3 - F5)
+  <br />
+  Tenor: 130 - 520 Hz (C3 - C5)
+  <br />
+  Bass: 80 - 320 Hz (E2 - E4)
+</body>
+</html>
