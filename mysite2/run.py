@@ -1,0 +1,24 @@
+#!/usr/bin/env python2
+
+from flask import Flask, request, render_template
+from flask_restful import Resource, Api
+app = Flask(__name__)
+api = Api(app)
+
+api.add_resource(Results, '/results/<string:title>')
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    # Only need GET requests
+    response.headers.add('Access-Control-Allow-Methods', 'GET')
+    return response
+
+@app.route('/')
+def render_html():
+    return render_template('index.html', a_var=None)
+
+if __name__ == '__main__':
+    app.run(debug=False, threaded=True)
+
