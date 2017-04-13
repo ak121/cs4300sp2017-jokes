@@ -3,34 +3,26 @@
 
 # # Make a function to build an inverted index and a tfidf vectorizer given tokenized text.
 
-# In[1]:
+# In[6]:
 
 from collections import defaultdict
 from scipy.sparse import csr_matrix
 import json
 
 
-# In[2]:
+# In[7]:
 
 with open('Jokes.json') as json_data:
     jokes = json.load(json_data)    
 
 
-# In[3]:
+# In[8]:
 
 # TODOS
 # n-grams for tfidf-vectorizer?
 
 
-# In[4]:
-
-
-
-
-
-
-
-
+# In[9]:
 
 def get_inverted_index(list_of_jokes, include_title, include_post):
     data = [(dt['title'] + ' ' + dt['selftext'] if include_post else dt['title']) if include_title else 
@@ -82,7 +74,7 @@ def build_inverted_index(list_of_toks_lists):
     return index    
 
 
-# In[5]:
+# In[10]:
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -106,7 +98,7 @@ def build_tfidf(list_of_jokes, include_title, include_post, n_feats, min_df = 10
     return (doc_by_vocab_sparse, index_to_vocab)
 
 
-# In[6]:
+# In[11]:
 
 # Not used yet.
 def filter_title_post(list_of_jokes):
@@ -119,11 +111,11 @@ def filter_title_post(list_of_jokes):
 
 
 
-# In[8]:
+# In[12]:
 
 #TESTING
 j = jokes
-print get_inverted_index(j, False, True)
+# print get_inverted_index(j, False, True)
 
 
 # In[36]:
@@ -136,7 +128,7 @@ get_inverted_index(j, True, True)['black']
 
 
 
-# In[35]:
+# In[80]:
 
 # Precompute and save all of this information
 n_feats = 5000
@@ -158,33 +150,16 @@ joke_id_to_title = {v:k for k,v in joke_title_to_id.iteritems()}
 joke_title_to_index = {title:joke_id_to_index[joke_title_to_id[title]] for title in [d['title'] for d in j]}
 joke_index_to_title = {v:k for k,v in joke_title_to_index.iteritems()}
 
+# maps joke id to the dictionary representing the joke post
+joke_id_to_joke = {joke_id:joke for joke_id, joke in [(d['id'], d) for d in j]}
+
 
 #printing
-print joke_id_to_index
-print joke_title_to_id
-print joke_id_to_title
-print joke_title_to_index
-print joke_index_to_title
-
-
-
-
-import defaultdict
-
-
-
-# input: cats = ['nsfw']
-def inv_idx_cats(cats, list_jokes):
-    cat_idx = defaultdict(list)
-    for cat in cats:
-        if cat == 'nsfw':
-            cat_idx['nsfw'] = [joke['id']  if joke['over_18']  for joke  in list_jokes]
-            # Having 'not_' categories is potentially unnecessary since every joke in a category is not going to be in opposite category
-            cat_idx['not_nsfw'] = [joke['id'] if (not joke['over_18']) for joke in list_jokes]
-
-
-
-
+# print joke_id_to_index
+# print joke_title_to_id
+# print joke_id_to_title
+# print joke_title_to_index
+# print joke_index_to_title
 
 # I think order of rows in tfidf is same as order of docs in the list j.
 # I think order of cols in tfidf is same as order of what get_feature_names, which I think is in alpha order.
@@ -222,7 +197,7 @@ sims = tfidf * tfidf_t
 #print build_tfidf(j, False, False, n_feats, min_df = 0, max_df = 1) 
 
 
-# In[17]:
+# In[81]:
 
 
 def get_sim(title1, title2, sims_mat):
@@ -246,37 +221,37 @@ def get_sim(title1, title2, sims_mat):
 
 
 
-# In[18]:
+# In[82]:
 
 get_sim('What are minorities?', 'I\'m Trying to Remember The Name of A Song', sims)
 
 
-# In[19]:
+# In[83]:
 
 # I wanted to buy an Audi.', 15689: u"I'm Trying to Remember The Name of A Song", 15690: u'What are minorities?', 15691: u'Did you hear that Donald Trump is technically a plant?', 15692: u'Yo mama is so ugly, when she was born the doctor wrapped the afterbirth in a blanket and threw her in the trash.', 15693: u'i had trouble swallowing a viagra last night', 15694: u'What 
 
 
-# In[21]:
+# In[84]:
 
 print sims[12,14]
 
 
-# In[24]:
+# In[85]:
 
 print sims.nonzero()
 
 
-# In[26]:
+# In[86]:
 
 print len(sims.nonzero()[0])
 
 
-# In[31]:
+# In[87]:
 
 nonzero_elems = zip(sims.nonzero()[0],sims.nonzero()[1])
 
 
-# In[34]:
+# In[88]:
 
 # print nonzero_elems
 
@@ -285,34 +260,103 @@ for elem in nonzero_elems:
         print '**'
 
 
-# In[37]:
+# In[89]:
+
+
+
+
 
 get_sim(joke_index_to_title[208], joke_index_to_title[611], sims)
 
 
-# In[ ]:
+# In[90]:
 
 print tfidf.nonzero()
 
 
-# In[39]:
+# In[91]:
 
 print tfidf
 
 
-# In[40]:
+# In[92]:
 
 joke_index_to_title[40]
 
 
-# In[41]:
+# In[93]:
 
 joke_index_to_title[3418]
 
 
-# In[44]:
+# In[94]:
 
 print type(tfidf)
+
+
+# In[95]:
+
+def inv_idx_cats(cats, list_jokes):
+    cat_idx = defaultdict(list)
+    for cat in cats:
+        if cat == 'nsfw':
+            cat_idx[cat] = [joke['id'] for joke in list_jokes if (joke['over_18'] or joke['domain'].lower() == 'self.meanjokes' or joke['domain'].lower() == 'self.dirtyjokes')]
+    return cat_idx
+
+
+# In[96]:
+
+inv_idx_cats(['nsfw'], [j[1]])
+
+
+# In[97]:
+
+j[1]
+
+
+# In[98]:
+
+# Artifically make true for testing purposes:
+j[19]['over_18'] = True
+print j[19]
+
+
+# In[99]:
+
+inv_idx_cats(['nsfw'], [j[1], j[19]])
+
+
+# In[100]:
+
+inv_idx_cats(['nsfw'], j)
+
+
+# In[101]:
+
+print 'nsfw joke count: '
+print len(inv_idx_cats(['nsfw'], j)['nsfw'])
+print 'total joke count: '
+print len(j)
+
+
+# In[102]:
+
+joke_id_to_title['5u9lex']
+
+
+# In[104]:
+
+joke_id_to_joke['5u9lex']
+
+
+# In[105]:
+
+joke_id_to_index['5u9lex']
+
+
+# In[106]:
+
+j[14437]
 
 
 # In[ ]:
