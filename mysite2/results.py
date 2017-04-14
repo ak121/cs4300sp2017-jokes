@@ -1,15 +1,16 @@
 from results_funcs import * # to get joke_id_to_joke
 from flask_restful import Resource
 from flask import url_for # might need at some point
+import json
 
 class Results(Resource):
-    def get(json_input):
-        input_dict = json.load(json_input)
+    def get(self, title):
+        input_dict = json.loads(title)
         query = input_dict['query']
         ranked_list = []
         # TODO IR stuff to get ranked_list
         
-        json_output = [None for i in xrange(len(ranked_list)]
+        json_output = [None for i in xrange(len(ranked_list))]
         i = 0
         # entries of ranked_list are just joke ids
         for jid in ranked_list:

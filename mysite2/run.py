@@ -2,7 +2,10 @@
 
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
-app = Flask(__name__)
+from results import Results
+
+
+app = Flask(__name__, template_folder='./static')
 api = Api(app)
 
 api.add_resource(Results, '/results/<string:title>')
