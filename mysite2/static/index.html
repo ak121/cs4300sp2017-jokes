@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8" >
   <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="http://code.onion.com/fartscroll.js"></script>
+  <!-- <script src="http://code.onion.com/fartscroll.js"></script> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="{{ url_for( 'static', filename='./showranks.js' )}}"></script>
-  <script type="text/javascript" src="{{ url_for( 'static', filename='./utils.js' )}}"></script>
-  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./styles.css')}}" />
+  <!-- <script type="text/javascript" src="{{ url_for( 'static', filename='./showranks.js' )}}"></script> -->
+  <script type="text/javascript" src="showranks.js"></script>
+  <!-- <script type="text/javascript" src="{{ url_for( 'static', filename='./utils.js' )}}"></script> -->
+  <script type="text/javascript" src="utils.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./styles.css')}}" /> -->
+  <link rel="stylesheet" type="text/css" href="styles.css" />
   <title>Jokester</title>
 </head>
 <body>
+  <h1 class="text-center">Welcome to the Joke Retriever</h1>
   <div class="form-group">
     <label for="text">Search with a joke or joke topic!</label>
     <input type="text" class="form-control" id="query">
@@ -25,6 +29,7 @@
 
       </thead>
       <tbody id="results-view">
+      
 
       </tbody>
     </table>

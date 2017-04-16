@@ -1,4 +1,4 @@
-fartscroll();
+// fartscroll();
 $(document).ready( () => {
   //$.get( `${window.location.href}results/`, updateResults )
 })
