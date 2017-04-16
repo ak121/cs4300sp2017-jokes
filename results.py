@@ -26,7 +26,7 @@ def build_tfidf(list_of_jokes, n_feats, include_title=True, include_post=True, m
     return (doc_by_vocab_sparse, index_to_vocab, tfidf_vec)
 
 jokes = []
-for fname in glob.glob('*.json'):
+for fname in glob.glob('Jokes.json'):
   with open(fname) as json_data:
     jokes += json.load(json_data)
 
