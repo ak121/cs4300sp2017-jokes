@@ -8,14 +8,17 @@ function retrieveJokes(){
   $.ajax({url:`${window.location.href}results/${encodeURI(JSON.stringify({'query':querystr}))}`,
     type: 'GET',
     dataType: 'json',
-    processData: false
-  }).done(updateResults);
+    processData: false,
+    success: updateResults
+  });
 };
 
 function updateResults(jokedata){
-  console.log(jokedata)
-  $('#results-view').empty();
-  for (joke in jokedata.responseJSON) {
-    $('#results-view').innerHTML += (jokedisp(joke));
+  $('#results-view').html("");
+  var i = 0;
+  for (joke of jokedata) {
+    newrow = $('#results-view')[0].insertRow(i);
+    newrow.innerHTML = jokedisp(joke);
+    i += 1;
   }
 };

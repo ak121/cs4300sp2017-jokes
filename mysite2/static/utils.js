@@ -1,10 +1,8 @@
 function jokedisp(joke){
   return (
-   `<tr>
-    <button data-toggle="collapse" data-target="${joke.id}">${joke.title}
-    </button>
-    <div id="${joke.id}" class="collapse">
-      ${joke.selftext}
+   `<div class="well well-sm" >${joke.title}
     </div>
-    </tr>`);
+    <div class="well well-lg">
+      ${joke.selftext}
+    </div>`);
 }
