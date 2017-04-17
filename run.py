@@ -9,7 +9,7 @@ import os
 app = Flask(__name__, template_folder='./static')
 api = Api(app)
 
-api.add_resource(Results, '/results')
+api.add_resource(Results, '/results/')
 
 @app.after_request
 def after_request(response):

@@ -1,5 +1,5 @@
 from results_funcs import * # to get joke_id_to_joke
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from flask import url_for # might need at some point
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -34,9 +34,14 @@ doc_by_vocab, index_to_vocab, tfidf = build_tfidf(jokes, n_feats=5000)
 pca = TruncatedSVD(n_components=50)
 dv_thin = pca.fit_transform(doc_by_vocab)
 
+
+parser = reqparse.RequestParser()
+parser.add_argument('query')
+
 class Results(Resource):
-    def post(self, title):
-        input_dict = json.loads(title)
+    def post(self):
+        args = parser.parse_args()
+        input_dict = args
         query = input_dict['query']
         ranked_list = []
         # TODO IR stuff to get ranked_list
