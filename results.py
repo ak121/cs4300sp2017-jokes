@@ -14,7 +14,7 @@ import glob
 def build_tfidf(list_of_jokes, n_feats, include_title=True, include_post=True, min_df = 10, max_df = 1.0):
     tfidf_vec = TfidfVectorizer(input='content', decode_error=u'ignore', strip_accents=u'unicode',
                                 analyzer=u'word',max_features=n_feats,stop_words='english',
-                                norm=u'l2',min_df=min_df,max_df=max_df,lowercase=True,vocabulary=None)
+                                norm=u'l2',min_df=min_df,max_df=max_df,lowercase=True,vocabulary=None, ngram_range=(1,3))
     data = [(dt['title'] + ' ' + dt['selftext'] if include_post else dt['title']) if include_title else 
             (dt['selftext'] if include_post else '') for dt in list_of_jokes]
     doc_by_vocab_sparse = tfidf_vec.fit_transform(data)
