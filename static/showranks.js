@@ -5,7 +5,7 @@ $(document).ready( () => {
 
 function retrieveJokes(){
   querystr = $('#query').val();
-  $.ajax({url:`${window.location.href}results/${encodeURI(JSON.stringify({'query':querystr}))}`,
+  $.ajax({url:`${window.location.href}results`,
     type: 'POST',
     dataType: 'json',
     processData: false,
