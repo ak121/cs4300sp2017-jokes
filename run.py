@@ -15,8 +15,8 @@ api.add_resource(Results, '/results/<string:title>')
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    # Only need GET requests
-    response.headers.add('Access-Control-Allow-Methods', 'GET')
+    # Only need POST requests
+    response.headers.add('Access-Control-Allow-Methods', 'POST')
     return response
 
 @app.route('/')
@@ -24,5 +24,5 @@ def render_html():
     return render_template('index.html', a_var=None)
 
 if __name__ == '__main__':
-  port = int(os.environ.get('PORT', 5000))
+  port = int(os.environ.post('PORT', 5000))
   app.run(host='0.0.0.0',debug=False, threaded=True, port=port)

@@ -35,7 +35,7 @@ pca = TruncatedSVD(n_components=50)
 dv_thin = pca.fit_transform(doc_by_vocab)
 
 class Results(Resource):
-    def get(self, title):
+    def post(self, title):
         input_dict = json.loads(title)
         query = input_dict['query']
         ranked_list = []
