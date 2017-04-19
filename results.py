@@ -1,6 +1,6 @@
 from results_funcs import * # to get joke_id_to_joke
 from flask_restful import Resource, reqparse
-from flask import url_for # might need at some point
+from flask import url_for, request # might need at some point
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
@@ -36,11 +36,12 @@ dv_thin = pca.fit_transform(doc_by_vocab)
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('query')
+parser.add_argument('query', location='json')
 
 class Results(Resource):
     def post(self):
-        args = parser.parse_args()
+        args = json.loads(request.form.keys()[0])
+        print args
         input_dict = args
         query = input_dict['query']
         ranked_list = []

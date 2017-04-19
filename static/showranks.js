@@ -9,6 +9,7 @@ function retrieveJokes(){
     type: 'POST',
     dataType: 'json',
     processData: false,
+    data: JSON.stringify({'query': querystr}),
     success: updateResults
   });
 };
