@@ -46,11 +46,11 @@ def build_tfidf(list_of_jokes, n_feats, include_title=True, include_post=True, m
 # pca = TruncatedSVD(n_components=50)
 # dv_thin = pca.fit_transform(doc_by_vocab)
 
-with open('jokes_4_222_dv_thin.json') as json_data:
+with open('dv_thin_4_22_2017_03_09PM.json') as json_data:
     dv_thin = json.load(json_data, object_hook=json_numpy_obj_hook, encoding='utf8')
 
-with open('jokes_4_222_tfidf.json') as json_data:
-    tfidf = json.load(json_data, object_hook=json_numpy_obj_hook, encoding='utf8')
+with open('vectorizer4_22_2017_03_09PM.pkl', 'rb') as fin:
+    tfidf = pickle.load(fin)
 
 parser = reqparse.RequestParser()
 parser.add_argument('query', location='json')
