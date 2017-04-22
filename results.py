@@ -6,6 +6,18 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 import json
 import glob
+import base64
+
+# Decoding numpy array from JSON (from Flask template)
+def json_numpy_obj_hook(dct):
+    """Decodes a previously encoded numpy ndarray with proper shape and dtype.
+    :param dct: (dict) json encoded ndarray
+    :return: (ndarray) if input was an encoded ndarray
+    """
+    if isinstance(dct, dict) and '__ndarray__' in dct:
+        data = base64.b64decode(dct['__ndarray__'])
+        return np.frombuffer(data, dct['dtype']).reshape(dct['shape'])
+    return dct
 
 # input: list of dictionaries, where each dict is a joke.
 # include_title and include_text are boolean flags -- important because need to determine whether we want to include 
