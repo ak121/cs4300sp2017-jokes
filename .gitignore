@@ -8,5 +8,6 @@
 
 *.swp
 *.swo
-
+*.npy
+*.pkl
 config.pyc post_collection.pyc
