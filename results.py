@@ -39,16 +39,15 @@ def build_tfidf(list_of_jokes, n_feats, include_title=True, include_post=True, m
     return (doc_by_vocab_sparse, index_to_vocab, tfidf_vec)
 
 # These files are under the encoded_data folder in our Google Drive folder
-with open('dv_thin_4_22_2017_03_09PM.json') as json_data:
-    dv_thin = json.load(json_data, object_hook=json_numpy_obj_hook, encoding='utf8')
+dv_thin = np.load('final_dv_thin_4_23_17.npy')
 
-with open('vectorizer4_22_2017_03_09PM.pkl', 'rb') as fin:
+with open('final_vectorizer_4_23_17.pkl', 'rb') as fin:
     tfidf = pickle.load(fin)
 
-with open('pca4_22_2017_03_12PM.pkl', 'rb') as fin:
+with open('final_pca_4_23_17.pkl', 'rb') as fin:
     pca = pickle.load(fin)
 
-with open('final_jokes_list4_22_2017_03_12PM.pkl', 'rb') as fin:
+with open('final_jokes_4_23_17.pkl', 'rb') as fin:
     jokes = pickle.load(fin)
 
 
