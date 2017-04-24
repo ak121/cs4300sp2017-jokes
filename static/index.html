@@ -14,20 +14,20 @@
   <title>Jokester</title>
 </head>
 <body>
-  <h1 class="text-center">Welcome to the Joke Retriever</h1>
+  <h1 class="text-center">Welcome to the Joke Retriever V2</h1>
   <div class="form-group">
     <label for="text">Search with a joke or joke topic!</label>
+    <!-- <input type="text" class="form-control" id="query">
+    <button onclick="retrieveJokes()">Get Jokes!</button> -->
     <input type="text" class="form-control" id="query">
-    <button onclick="retrieveJokes()">Get Jokes!</button>
+    <button id="search_button" onclick="retrieveJokes()">Get Jokes!</button>
   </div>
   <div class="container">
     <table>
       <thead>
 
       </thead>
-      <tbody id="results-view">
-      
-
+      <tbody id="results-view">      
       </tbody>
     </table>
   </div>
