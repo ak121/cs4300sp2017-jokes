@@ -27,7 +27,13 @@ h1{
 	/*color: hsl(260,100%,50%);*/
 	
 	/*color: hsl(200,100%,90%);*/
-	color: hsl(220,100%,75%);
+	/*color: hsl(220,100%,75%);*/
+	/*color: hsl(180,100%,75%);*/
+	/*color: hsl(220,80%,50%);*/
+	color: hsl(190,80%,50%);
+	font-weight: bolder;
+	text-shadow: #000 3px 3px 0;
+
 	/*border: 2px solid black;*/
 	/*color: hsl(200,100%,100%);*/
 	font-size: 32pt;
@@ -40,6 +46,7 @@ button{
 	border: 2px solid black;
 	/*background-color: hsl(200,100%,90%);*/
 	/*color: hsl(170,100%,30%);*/
+	background-color: hsl(190,80%,50%);
 }
 
 td,th,tr{
