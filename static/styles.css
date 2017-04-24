@@ -8,19 +8,38 @@ body{
 	/*background-color: hsl(200,80%,90%);*/
 	/*background: radial-gradient(#77d19e,#46c17b);*/
 	/*background: radial-gradient(#002255,#00AACC);*/
-	background: radial-gradient(#00AACC,#002255);
-	padding: 30px;	
+	
+	/*background: radial-gradient(#00AACC,#002255);
+	padding: 30px;	*/
+
+	/*background: url("joke_background.png");*/	
+	/*background-size: 100% auto;*/
+	/*background-repeat: no-repeat;*/
+	background-image: url("house_brick_tile.jpg");
+	background-repeat: repeat;
+	background-color: rgba(0,0,0,0.5);
 }
 
 h1{
 	/*color: #FFC300;*/
 	/*color: hsl(45,100%,50%);*/
-	color: hsl(45,100%,50%);
+	/*color: hsl(45,100%,50%);*/
+	/*color: hsl(260,100%,50%);*/
+	
+	/*color: hsl(200,100%,90%);*/
+	color: hsl(220,100%,75%);
+	/*border: 2px solid black;*/
+	/*color: hsl(200,100%,100%);*/
 	font-size: 32pt;
 }
 
 button{
 	margin-top: 5px;
+	/*background-color: hsl(45,100%,50%);*/
+	/*color: hsl(260,100%,50%);*/
+	border: 2px solid black;
+	/*background-color: hsl(200,100%,90%);*/
+	/*color: hsl(170,100%,30%);*/
 }
 
 td,th,tr{
@@ -29,6 +48,7 @@ td,th,tr{
 }
 
 .form-group{
+	/*opacity: 0.9;*/
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
@@ -40,6 +60,7 @@ td,th,tr{
 }
 
 .container{
+	/*opacity: 0.9;*/
 	background-color: hsl(0,0%,98%);
 	/*background-color: hsl(200,50%,95%);*/
 	/*background-color: #0088CC;*/		
@@ -54,6 +75,22 @@ td,th,tr{
 }
 
 .results{
-	/**/
+	transform: rotateY();
+	border: 2px solid black;
+	/*transform-style: preserve3d;*/
+	/*font-size: 18pt;*/
 }
 
+.flip{
+	transform: rotateY();
+	/*transform-style: preserve3d;*/
+	/*font-size: 14pt;*/
+}
+
+.question{
+	font-size: 16pt;
+}
+
+.answer{
+	font-size: 12pt;
+}

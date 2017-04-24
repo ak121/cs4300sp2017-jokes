@@ -7,6 +7,7 @@ from sklearn.decomposition import TruncatedSVD
 import json
 import glob
 import base64
+import pickle
 
 # Decoding numpy array from JSON (from Flask template)
 def json_numpy_obj_hook(dct):
@@ -37,20 +38,18 @@ def build_tfidf(list_of_jokes, n_feats, include_title=True, include_post=True, m
     # return sparse tfidf matrix, and mapping showing the word's index to the word itself
     return (doc_by_vocab_sparse, index_to_vocab, tfidf_vec)
 
-# jokes = []
-# for fname in glob.glob('Jokes.json'):
-#   with open(fname) as json_data:
-#     jokes += json.load(json_data)
+# These files are under the encoded_data folder in our Google Drive folder
+dv_thin = np.load('final_dv_thin_4_23_17.npy')
 
-# doc_by_vocab, index_to_vocab, tfidf = build_tfidf(jokes, n_feats=5000)
-# pca = TruncatedSVD(n_components=50)
-# dv_thin = pca.fit_transform(doc_by_vocab)
-
-with open('dv_thin_4_22_2017_03_09PM.json') as json_data:
-    dv_thin = json.load(json_data, object_hook=json_numpy_obj_hook, encoding='utf8')
-
-with open('vectorizer4_22_2017_03_09PM.pkl', 'rb') as fin:
+with open('final_vectorizer_4_23_17.pkl', 'rb') as fin:
     tfidf = pickle.load(fin)
+
+with open('final_pca_4_23_17.pkl', 'rb') as fin:
+    pca = pickle.load(fin)
+
+with open('final_jokes_4_23_17.pkl', 'rb') as fin:
+    jokes = pickle.load(fin)
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('query', location='json')
