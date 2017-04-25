@@ -61,13 +61,13 @@ class Results(Resource):
         input_dict = args
         query = input_dict['query']
         ranked_list = []
+        include_nsfw = True #Hard coded right now but should get from query params
         # TODO IR stuff to get ranked_list
         qvec = tfidf.transform([query])
         qvec_thin = pca.transform(qvec)
         sims = dv_thin.dot(qvec_thin.T)
-        idxs = np.argsort(-sims[:,0])[:10]
-        ranked_list = [jokes[i] for i in idxs]
-        print sims[:10,:]
+        idxs = np.argsort(-sims[:,0])
+        ranked_list = [jokes[i] for i in idxs if (include_nsfw and True)][:10]
         json_output = ranked_list
         """
         i = 0
