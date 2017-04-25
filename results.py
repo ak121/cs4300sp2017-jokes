@@ -66,8 +66,8 @@ class Results(Resource):
         qvec = tfidf.transform([query])
         qvec_thin = pca.transform(qvec)
         sims = dv_thin.dot(qvec_thin.T)
-        idxs = np.argsort(-sims[:,0])
-        ranked_list = [jokes[i] for i in idxs if (include_nsfw and True)][:10]
+        idxs = np.argsort(-sims[:,0])[:1000]
+        ranked_list = [jokes[i] for i in idxs if (include_nsfw or not jokes[i]["over_18"])][:10]
         json_output = ranked_list
         """
         i = 0
