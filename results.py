@@ -50,7 +50,7 @@ with open('final_pca_4_23_17.pkl', 'rb') as fin:
 with open('final_jokes_4_23_17.pkl', 'rb') as fin:
     jokes = pickle.load(fin)
 
-with open('nsfwclassifier.pkl', 'rb') as fin:
+with open('nsfwclassifier.pkl', 'r') as fin:
     nsfwclf = pickle.load(fin)
 
 
