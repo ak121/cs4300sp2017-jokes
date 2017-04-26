@@ -50,6 +50,9 @@ with open('final_pca_4_23_17.pkl', 'rb') as fin:
 with open('final_jokes_4_23_17.pkl', 'rb') as fin:
     jokes = pickle.load(fin)
 
+with open('nsfwclassifier.pkl', 'rb') as fin:
+    nsfwclf = pickle.load(fin)
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('query', location='json')
@@ -68,7 +71,7 @@ class Results(Resource):
         qvec_thin = pca.transform(qvec)
         sims = dv_thin.dot(qvec_thin.T)
         idxs = np.argsort(-sims[:,0])[:1000]
-        ranked_list = [jokes[i] for i in idxs if (include_nsfw or not jokes[i]["over_18"])][:10]
+        ranked_list = [jokes[i] for i in idxs if (include_nsfw or not nsfwclf.predict( [jokes[i]["title"] + jokes[i]["selftext"]] )[0])][:10]
         json_output = ranked_list
         """
         i = 0
