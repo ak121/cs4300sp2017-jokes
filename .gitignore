@@ -10,4 +10,5 @@
 *.swo
 *.npy
 *.pkl
+!nsfwclassifier.pkl
 config.pyc post_collection.pyc
