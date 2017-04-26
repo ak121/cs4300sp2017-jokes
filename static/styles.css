@@ -40,13 +40,23 @@ h1{
 }
 
 button{
-	margin-top: 5px;
+	/*margin-top: 5px;*/
+	margin-top: 10px;
+	margin-right: 5px;
 	/*background-color: hsl(45,100%,50%);*/
 	/*color: hsl(260,100%,50%);*/
 	border: 2px solid black;
 	/*background-color: hsl(200,100%,90%);*/
 	/*color: hsl(170,100%,30%);*/
 	background-color: hsl(190,80%,50%);
+	float: right;
+}
+
+#nsfw{
+	/*padding-left: 10px;*/
+	margin-left: 5px;
+	margin-top: 10px;
+
 }
 
 td,th,tr{
