@@ -14,12 +14,14 @@
   <title>Jokester</title>
 </head>
 <body>
-  <h1 class="text-center">Welcome to the Joke Retriever V2</h1>
+  <h1 class="text-center">Welcome to the Joke Retriever <span style="color: hsl(50,80%,50%);">V3</span></h1>
   <div class="form-group">
-    <label for="text">Search with a joke or joke topic!</label>
+    <label for="text">Search for a joke in our collection!</label>
     <!-- <input type="text" class="form-control" id="query">
     <button onclick="retrieveJokes()">Get Jokes!</button> -->
-    <input type="text" class="form-control" id="query">
+    <input type="text" class="form-control" id="query" placeholder="Enter a joke or topic here!">
+    <input type="checkbox" id="nsfw" value="wantNSFW">
+    <label for="nsfw">Allow NSFW</label>
     <button id="search_button" onclick="retrieveJokes()">Get Jokes!</button>
   </div>
   <div class="container">
