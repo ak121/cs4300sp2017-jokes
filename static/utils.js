@@ -7,8 +7,8 @@ function jokedisp(joke){
   //   </div>`);
   return (
    `<div class="well well-lg results">
-   		<div class="question">${joke.title}</div>
-      <div class="answer" style="display: none;">${joke.selftext}</div>
+   		<div class="question"><i>Q:</i> ${joke.title}</div>
+      <div class="answer" style="display: none;"><i>A:</i> ${joke.selftext}</div>
     </div>`);
 }
 
