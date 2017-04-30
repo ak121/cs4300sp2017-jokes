@@ -64,7 +64,6 @@ class Results(Resource):
         input_dict = args
         query = input_dict['query']
         ranked_list = []
-        #include_nsfw = True #Hard coded right now but should get from query params
         include_nsfw = input_dict['nsfw'];
         # TODO IR stuff to get ranked_list
         qvec = tfidf.transform([query])
