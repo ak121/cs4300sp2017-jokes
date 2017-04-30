@@ -22,7 +22,7 @@ function retrieveJokes(){
 };
 
 function updateResults(jokedata){
-  $('#results-view').html("Click each card to reveal the answer!");
+  $('#results-view').html("<b>Click each card to reveal the answer!</b><br>");
   var i = 0;
   for (joke of jokedata) {
     newrow = $('#results-view')[0].insertRow(i);

@@ -51,7 +51,7 @@ with open('final_pca_4_23_17.pkl', 'rb') as fin:
 with open('final_jokes_4_23_17.pkl', 'rb') as fin:
     jokes = pickle.load(fin)
 
-with open('nsfwclassifier.pkl', 'rb') as fin:
+with open('nsfwclassifier.pkl', 'r') as fin:
     nsfwclf = pickle.load(fin)
 
 nlp = spacy.load('en')
@@ -125,7 +125,6 @@ class Results(Resource):
         input_dict = args
         query = input_dict['query']
         ranked_list = []
-        #include_nsfw = True #Hard coded right now but should get from query params
         include_nsfw = input_dict['nsfw'];
         qvec = tfidf.transform([query])
         qvec_thin = pca.transform(qvec)
