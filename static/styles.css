@@ -60,27 +60,14 @@ td,th,tr{
 }
 
 .suggestions{
-	/*float: right;*/
 	background-color: hsl(0,0%,98%);
 	padding-top: 10px;
-	margin-top: -15px;
-	/*margin-right: inherit;
-	margin-left: inherit;*/
-	/*margin-right: inherit;
-	margin-left: inherit;
-	width: inherit;
-	max-width: inherit;*/
-	/*display: block;*/
-	/*border: 1.5px solid hsl(0,0%,80%);*/
-
+	margin-top: -15px;	
 	border-bottom: 2px solid hsl(0,0%,80%);
-	/*border-top: 1.5px solid hsl(0,0%,80%);*/
-
 	width: 85%;
 	max-width: 700px;
 	margin-right: auto;
 	margin-left: auto;
-	/*display: block;*/
 	display: flex;
 	padding: 10px;
 }
@@ -91,8 +78,6 @@ td,th,tr{
 
 .suggestions li {
 	display: inline;
-	/*list-style-type: disc;*/
-	/*display: inline-flex;*/
 }
 
 .results{
@@ -124,27 +109,27 @@ td,th,tr{
 }
 
 .question{
-	float: right; /*Reversed because of the rotation*/
+	text-align: left;
 	font-size: 16pt;
 	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
 .answer{
-	float: right; /*Reversed because of the rotation*/
+	text-align: left;
 	font-size: 12pt;
 	-webkit-transform: rotateY(-180deg);
 	transform: rotateY(-180deg);
 }
 
 .results .metadata{
-	float: left; /*Reversed because of the rotation*/
+	text-align: right;
 	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
 .results .metadata .flip{
-	float: left; /*Reversed because of the rotation*/
+	text-align: right;
 	-webkit-transform: rotateY(-180deg);
 	transform: rotateY(-180deg);
 }
