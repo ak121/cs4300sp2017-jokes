@@ -52,12 +52,8 @@ $(document).ready( () => {
   $("#filter_button").on("click", function(){    
     opt_text = $("#opt_filter");
     opt_text.toggle();
-    console.log(opt_text.is(":hidden"));
     if(opt_text.is(":hidden")){
-    // if(opt_text.attr("display")=="none"){
-      // $("#opt_query").attr("value","");
       $("#opt_query").val("");
-      // opt_text.val("");
       $("#filter_button").html("Show Advanced Search");
     }
     else if(!opt_query.is(":hidden")){
