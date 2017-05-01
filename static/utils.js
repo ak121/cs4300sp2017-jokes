@@ -16,9 +16,9 @@ function jokedisp(joke){
    `<div class="well well-lg results">
       <div class="metadata">
         <ul>        
-          <li> <i>Comments:</i> ${num_comments} </li>
-          <li> <i>Upvotes:</i> ${upvotes} </li>
-          <li> <i>Downvotes:</i> ${downvotes} </li>
+          <li>  &#x1F4AC; ${num_comments} </li>
+          <li>  &#x1F44D; ${upvotes} </li>
+          <li>  &#x1F44E; ${downvotes} </li>
         </ul>
       </div> <br>
    		<div class="question"><i>Q:</i> ${joke.title}</div>
