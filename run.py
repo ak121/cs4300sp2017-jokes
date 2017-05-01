@@ -2,7 +2,7 @@
 
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api
-from results import Results
+from results import Results, get_suggestions
 import os
 
 
@@ -21,8 +21,8 @@ def after_request(response):
 
 @app.route('/')
 def render_html():
-    return render_template('index.html', a_var=None)
+    return render_template('index.html', suggestions=get_suggestions())
 
 if __name__ == '__main__':
-  port = int(os.environ.get('PORT', 80))
+  port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0',debug=False, threaded=True, port=port)

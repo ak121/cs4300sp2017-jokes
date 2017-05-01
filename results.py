@@ -81,30 +81,12 @@ LABELS = {
     'CARDINAL': 'CARDINAL'
 }
 
+def get_suggestions():
+    tfidfsum = pca.inverse_transform(dv_thin.sum(axis=0).reshape(1,-1))
+    return [tfidf.get_feature_names()[i] for i in np.argsort(-tfidfsum[0,:])[1:20]]
+
 def transform_texts(texts):
-    # Load the annotation models
-    # Stream texts through the models. We accumulate a buffer and release
-    # the GIL around the parser, for efficient multi-threading.
-    for doc in nlp.pipe(texts, n_threads=2):
-        # Iterate over base NPs, e.g. "all their good ideas"
-        for np in list(doc.noun_chunks):
-            # Only keep adjectives and nouns, e.g. "good ideas"
-            while len(np) > 1 and np[0].dep_ not in ('amod', 'compound'):
-                np = np[1:]
-            if len(np) > 1:
-                # Merge the tokens, e.g. good_ideas
-                np.merge(np.root.tag_, np.text, np.root.ent_type_)
-            # Iterate over named entities
-            for ent in doc.ents:
-                if len(ent) > 1:
-                    # Merge them into single tokens
-                    ent.merge(ent.root.tag_, ent.text, ent.label_)
-        token_strings = []
-        for token in doc:
-            text = token.text.replace(' ', '_')
-            tag = token.ent_type_ or token.pos_
-            token_strings.append('%s|%s' % (text, tag))
-        yield ' '.join(token_strings)
+    return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
 
 def pseudorel_qvec(qvecthin, ranked_idxs):
     a = 1.0
@@ -115,7 +97,7 @@ def pseudorel_qvec(qvecthin, ranked_idxs):
 def get_ranked_idxs(qvec_thin, include_nsfw):
     sims = dv_thin.dot(qvec_thin.T)
     idxs = np.argsort(-sims[:,0])[:1000]
-    ranked_idxs = [i for i in idxs if (include_nsfw or not nsfwclf.predict( [jokes[i]["title"] + jokes[i]["selftext"]] )[0])][:10]
+    ranked_idxs = [i for i in idxs if (include_nsfw or not nsfwclf.predict( [jokes[i]["title"] + jokes[i]["selftext"]] )[0])][:20]
     return ranked_idxs
 
 class Results(Resource):

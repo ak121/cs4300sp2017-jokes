@@ -24,12 +24,22 @@
     <label for="nsfw">Allow NSFW</label>
     <button id="search_button" onclick="retrieveJokes()">Get Jokes!</button>
   </div>
+  <div class="suggestions">
+    <b>Suggestions:</b>
+    <ul>
+      {% for suggestion in suggestions %}
+        <li>
+          {{suggestion}}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
   <div class="container">
     <table>
       <thead>
 
       </thead>
-      <tbody id="results-view">      
+      <tbody id="results-view">
       </tbody>
     </table>
   </div>

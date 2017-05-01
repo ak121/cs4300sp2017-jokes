@@ -1,19 +1,19 @@
-body{	
+body{
 	background-image: url("house_brick_tile.jpg");
 	background-repeat: repeat;
 	background-color: rgba(0,0,0,0.5);
 }
 
-h1{	
+h1{
 	color: hsl(190,80%,50%);
 	font-weight: bolder;
-	text-shadow: #000 3px 4px 0;	
+	text-shadow: #000 3px 4px 0;
 	font-size: 32pt;
 }
 
 button{
 	margin-top: 10px;
-	margin-right: 5px;	
+	margin-right: 5px;
 	border: 2px solid black;
 	background-color: hsl(190,80%,50%);
 	float: right;
@@ -39,7 +39,7 @@ td,th,tr{
 	margin-right: auto;
 	margin-left: auto;
 	background-color: hsl(0,0%,95%);
-	padding: 10px;	
+	padding: 10px;
 	width: 85%;
 	max-width: 700px;
 	border-bottom: 2px solid hsl(0,0%,80%);
@@ -47,7 +47,7 @@ td,th,tr{
 
 .container{
 	/*opacity: 0.9;*/
-	background-color: hsl(0,0%,98%);		
+	background-color: hsl(0,0%,98%);
 	padding-top: 10px;
 	margin-top: -15px;
 	display: block;
@@ -58,6 +58,16 @@ td,th,tr{
 	max-width: 700px;
 }
 
+.suggestions{
+	float: right;
+	background-color: hsl(0,0%,98%);
+	padding-top: 10px;
+	margin-top: -15px;
+	margin-right: auto;
+	margin-left: 10px;
+	display: block;
+}
+
 .results{
 	cursor: pointer;
 	-webkit-transform: rotateY(-180deg);
@@ -66,7 +76,7 @@ td,th,tr{
     transition: all 0.2s ease-in-out;
 	border: 2px solid black;
 	-webkit-transform-style: preserve-3d;
-	transform-style: preserve-3d;	
+	transform-style: preserve-3d;
 }
 
 .results:hover{
