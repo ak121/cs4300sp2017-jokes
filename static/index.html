@@ -23,13 +23,24 @@
     <input type="checkbox" id="nsfw" value="wantNSFW">
     <label for="nsfw">Allow NSFW</label>
     <button id="search_button" onclick="retrieveJokes()">Get Jokes!</button>
+    <!-- <div class="suggestions">
+      <b>Query Suggestions:</b>
+      <ul>
+        {% for suggestion in suggestions %}
+          <li>
+            {{suggestion}}
+          </li>
+        {% endfor %}
+      </ul>
+    </div> -->
   </div>
   <div class="suggestions">
-    <b>Suggestions:</b>
+    <b>Query Suggestions:</b>
     <ul>
+      &bull;
       {% for suggestion in suggestions %}
         <li>
-          {{suggestion}}
+          {{suggestion}} &bull;
         </li>
       {% endfor %}
     </ul>
