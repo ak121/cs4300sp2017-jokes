@@ -20,7 +20,7 @@ function jokedisp(joke){
           <li>  &#x1F44D; ${upvotes} </li>
           <li>  &#x1F44E; ${downvotes} </li>
         </ul>
-      </div> <br>
+      </div>
    		<div class="question"><i>Q:</i> ${joke.title}</div>
       <div class="answer" style="display: none;"><i>A:</i> ${joke.selftext}</div>      
     </div>`);
