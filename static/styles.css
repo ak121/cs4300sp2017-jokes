@@ -16,8 +16,20 @@ button{
 	margin-top: 10px;
 	margin-right: 5px;
 	border: 2px solid black;
-	background-color: hsl(190,80%,50%);
+	background-color: hsl(190,80%,50%);	
+}
+
+#search_button{
 	float: right;
+}
+
+/*#filter_button{
+	float: left;
+}
+*/
+
+#nsfw{
+	float: bottom left;
 }
 
 button:hover{

@@ -27,7 +27,10 @@ function jokedisp(joke){
 }
 
 $(document).ready( () => {
+  var opt_query = $("#opt_filter");
   $(".container").hide();
+  $("#opt_filter").hide();
+  opt_query.attr("value","");
 
   $("#results-view").on("click", ".results", function(){
     if($(this).hasClass("flip")){
@@ -44,9 +47,32 @@ $(document).ready( () => {
       var answer = $(this).find(".answer");      
       answer.show();      
     }
-  });  
+  }); 
+
+  $("#filter_button").on("click", function(){    
+    opt_text = $("#opt_filter");
+    opt_text.toggle();
+    console.log(opt_text.is(":hidden"));
+    if(opt_text.is(":hidden")){
+    // if(opt_text.attr("display")=="none"){
+      // $("#opt_query").attr("value","");
+      $("#opt_query").val("");
+      // opt_text.val("");
+      $("#filter_button").html("Show Advanced Search");
+    }
+    else if(!opt_query.is(":hidden")){
+      $("#filter_button").html("Hide Advanced Search");
+    }
+  });
+  
 
   $("#query").keyup(function(event){
+    if(event.keyCode==13){
+      $("#search_button").click();
+    }
+  });
+
+  $("#opt_query").keyup(function(event){
     if(event.keyCode==13){
       $("#search_button").click();
     }
