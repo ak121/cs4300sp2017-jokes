@@ -9,6 +9,8 @@ $(document).ready( () => {
 
 function retrieveJokes(){
   querystr = $('#query').val();
+  opt_querystr = $('#opt_query').val();  
+  console.log(opt_querystr);
   var isChecked = false;
   nsfwCheckbox = document.querySelector('input[value="wantNSFW"]'); //This technically shouldn't go here, but okay
   if(nsfwCheckbox.checked) isChecked = true;
@@ -16,7 +18,7 @@ function retrieveJokes(){
     type: 'POST',
     dataType: 'json',
     processData: false,
-    data: JSON.stringify({'query': querystr, 'nsfw' : isChecked}),
+    data: JSON.stringify({'query': querystr, 'nsfw' : isChecked, 'exclude' : opt_querystr}),
     success: updateResults
   });
 };
