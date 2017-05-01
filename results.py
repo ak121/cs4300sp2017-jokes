@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 # import spacy
+from nltk.corpus import wordnet as wn
 import json
 import glob
 import base64
@@ -54,6 +55,7 @@ with open('final_jokes_4_23_17.pkl', 'rb') as fin:
 with open('nsfwclassifier.pkl', 'r') as fin:
     nsfwclf = pickle.load(fin)
 
+nouns = {x.name().split('.',1)[0] for x in wn.all_synsets('n')}
 # nlp = spacy.load('en')
 
 parser = reqparse.RequestParser()
@@ -83,16 +85,20 @@ LABELS = {
 
 def get_suggestions():
     tfidfsum = pca.inverse_transform(dv_thin.sum(axis=0).reshape(1,-1))
-    return [tfidf.get_feature_names()[i] for i in np.argsort(-tfidfsum[0,:])[1:20]]
+    featnames = tfidf.get_feature_names()
+    return [featnames[i] for i in np.argsort(-tfidfsum[0,:])[1:40] if featnames[i] in nouns]
 
 # def transform_texts(texts):
 #     return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
 
-def pseudorel_qvec(qvecthin, ranked_idxs):
+def pseudorel_qvec(qvecthin, ranked_idxs, excludevec = None):
     a = 1.0
     b = 0.8
+    c = 0.3
     relvecs = dv_thin[ranked_idxs,:]
-    return a*qvecthin + b*np.sum(relvecs, axis=0)
+    if excludevec is None:
+        excludevec = np.zeros(qvecthin.shape)
+    return a*qvecthin + b*np.sum(relvecs, axis=0) - c*excludevec
 
 def get_ranked_idxs(qvec_thin, include_nsfw):
     sims = dv_thin.dot(qvec_thin.T)
@@ -106,12 +112,15 @@ class Results(Resource):
         print args
         input_dict = args
         query = input_dict['query']
+        exclude = input_dict['exclude']
         ranked_list = []
         include_nsfw = input_dict['nsfw'];
         qvec = tfidf.transform([query])
         qvec_thin = pca.transform(qvec)
+        evec = tfidf.transform([exclude]) if exclude else np.zeros(qvec.shape)
+        evec_thin = pca.transform(evec)
         ranked_idxs = get_ranked_idxs(qvec_thin, include_nsfw)
-        newqvec_thin = pseudorel_qvec(qvec_thin, ranked_idxs)
+        newqvec_thin = pseudorel_qvec(qvec_thin, ranked_idxs, excludevec=evec_thin)
         new_ranked_idxs = get_ranked_idxs(newqvec_thin, include_nsfw)
         ranked_list = [jokes[i] for i in new_ranked_idxs]
         json_output = ranked_list
