@@ -5,10 +5,24 @@ function jokedisp(joke){
   //   <div class="well well-lg">
   //     ${joke.selftext}
   //   </div>`);
+  var num_comments = joke.metadata.num_comments //'${joke.metadata.num_comments}';
+  if(num_comments==undefined) num_comments = "N/A";
+  var upvotes = joke.metadata.ups; //'${joke.metadata.ups}';
+  if(upvotes==undefined) upvotes = "N/A";
+  var downvotes = joke.metadata.downs; //'${joke.metadata.downs}';
+  if(downvotes==undefined) downvotes = "N/A";
+
   return (
    `<div class="well well-lg results">
+      <div class="metadata">
+        <ul>        
+          <li> <i>Comments:</i> ${num_comments} </li>
+          <li> <i>Upvotes:</i> ${upvotes} </li>
+          <li> <i>Downvotes:</i> ${downvotes} </li>
+        </ul>
+      </div> <br>
    		<div class="question"><i>Q:</i> ${joke.title}</div>
-      <div class="answer" style="display: none;"><i>A:</i> ${joke.selftext}</div>
+      <div class="answer" style="display: none;"><i>A:</i> ${joke.selftext}</div>      
     </div>`);
 }
 

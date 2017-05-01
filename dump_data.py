@@ -2,11 +2,11 @@ import pickle as pkl
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
-import spacy
+# import spacy
 import json
 import glob
 
-nlp = spacy.load('en')
+# nlp = spacy.load('en')
 jokefile = 'final_jokes_4_23_17.pkl'
 tfidf_transformer_file = 'final_vectorizer_4_23_17.pkl'
 pca_file = 'final_pca_4_23_17.pkl'
@@ -44,8 +44,8 @@ def transform_texts(texts):
         yield ' '.join(token_strings)
 """
 
-def transform_texts(texts):
-    return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
+# def transform_texts(texts):
+#     return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
 
 transformed_sents = [' '.join([joke['title'], joke['selftext']]) for joke in jokelist]
 print "Transformed Sentences"

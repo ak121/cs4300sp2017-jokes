@@ -4,7 +4,7 @@ from flask import url_for, request # might need at some point
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
-import spacy
+# import spacy
 import json
 import glob
 import base64
@@ -54,7 +54,7 @@ with open('final_jokes_4_23_17.pkl', 'rb') as fin:
 with open('nsfwclassifier.pkl', 'r') as fin:
     nsfwclf = pickle.load(fin)
 
-nlp = spacy.load('en')
+# nlp = spacy.load('en')
 
 parser = reqparse.RequestParser()
 parser.add_argument('query', location='json')
@@ -85,8 +85,8 @@ def get_suggestions():
     tfidfsum = pca.inverse_transform(dv_thin.sum(axis=0).reshape(1,-1))
     return [tfidf.get_feature_names()[i] for i in np.argsort(-tfidfsum[0,:])[1:20]]
 
-def transform_texts(texts):
-    return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
+# def transform_texts(texts):
+#     return [' '.join([sent.lemma_ for sent in doc.sents]) for doc in nlp.pipe(texts, n_threads=2)]
 
 def pseudorel_qvec(qvecthin, ranked_idxs):
     a = 1.0

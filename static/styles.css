@@ -53,7 +53,6 @@ td,th,tr{
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
-
 	width: 85%;
 	max-width: 700px;
 }
@@ -77,6 +76,10 @@ td,th,tr{
 	border: 2px solid black;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	min-height: 175px;
+	height: auto;
 }
 
 .results:hover{
@@ -93,13 +96,31 @@ td,th,tr{
 }
 
 .question{
+	float: right; /*Reversed because of the rotation*/
 	font-size: 16pt;
 	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
 .answer{
+	float: right; /*Reversed because of the rotation*/
 	font-size: 12pt;
 	-webkit-transform: rotateY(-180deg);
 	transform: rotateY(-180deg);
+}
+
+.results .metadata{
+	float: left; /*Reversed because of the rotation*/
+	-webkit-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+.results .metadata .flip{
+	float: left; /*Reversed because of the rotation*/
+	-webkit-transform: rotateY(-180deg);
+	transform: rotateY(-180deg);
+}
+
+.metadata li{
+	display: inline;
 }
