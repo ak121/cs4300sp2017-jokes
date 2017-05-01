@@ -27,6 +27,8 @@ function jokedisp(joke){
 }
 
 $(document).ready( () => {
+  $(".container").hide();
+
   $("#results-view").on("click", ".results", function(){
     if($(this).hasClass("flip")){
       $(this).removeClass("flip");    

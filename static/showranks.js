@@ -29,4 +29,5 @@ function updateResults(jokedata){
     newrow.innerHTML = jokedisp(joke);
     i += 1;
   }
+  $(".container").show();
 };
