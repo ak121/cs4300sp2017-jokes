@@ -55,6 +55,17 @@ with open('final_jokes_4_23_17.pkl', 'rb') as fin:
 with open('nsfwclassifier.pkl', 'r') as fin:
     nsfwclf = pickle.load(fin)
 
+## FILES LOADED by Dani
+# with open('inv_index_file.pkl','r') as fin:
+#     inv_index = pickle.load(fin)
+
+# with open('index_to_vocab.pkl','r') as fin:
+#     index_to_vocab = pickle.load(fin)
+
+# with open('vocab_to_index.pkl','r') as fin:
+#     vocab_to_index = pickle.load(fin)
+####
+
 nouns = {x.name().split('.',1)[0] for x in wn.all_synsets('n')}
 # nlp = spacy.load('en')
 
@@ -106,12 +117,40 @@ def get_ranked_idxs(qvec_thin, include_nsfw):
     ranked_idxs = [i for i in idxs if (include_nsfw or not nsfwclf.predict( [jokes[i]["title"] + jokes[i]["selftext"]] )[0])][:20]
     return ranked_idxs
 
+###### TOPIC MODEL AND GETTING JOKES FROM FEATURES by Dani
+# def closest_words(word_in, k = 10):
+#     if word_in not in vocab_to_index: []
+#     sims = words_compressed.dot(words_compressed[vocab_to_index[word_in],:])
+#     asort = np.argsort(-sims)[:k+1]
+#     return [(index_to_vocab[i],sims[i]/sims[asort[0]]) for i in asort[1:]]
+# flatten = lambda l: [item for sublist in l for item in sublist]
+# def grab_jokes_from_word(word_list):
+#     words = [[k[0] for k in closest_words(word,2)] for word in word_list]
+#     if not words:
+#         return []
+#     flattened_words = flatten(words)
+#     return [k[0] for k in flatten([inv_index[w] for w in words if w in inv_index])]
+######
+
 class Results(Resource):
     def post(self):
         args = json.loads(request.form.keys()[0])
         print args
         input_dict = args
         query = input_dict['query']
+
+        #### IF WERE TO INCLUDE by Dani
+        # query_nouns = [k for k in query.split(' ') if k in nouns][:2]
+        # print query_nouns
+        # closest_query_words = flatten([closest_words(k,2) for k in query_nours])
+        # print "===="
+        # print closest_query_words
+        # #### 
+        # if 'liked' in input_dict:
+        #     words = input_dict['liked'].split(",")
+        #     closest_liked_words = flatten([closest_words(k,2) for k in words])
+        #     releveant_jokes = grab_jokes_from_word(closest_liked_words) 
+        ### 
         exclude = input_dict['exclude']
         ranked_list = []
         include_nsfw = input_dict['nsfw'];
